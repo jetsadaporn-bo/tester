@@ -1,19 +1,19 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
 
-test('เข้าเว็บ Facebook และตรวจสอบ title', async ({ page }) => {
-  await page.goto('https://www.facebook.com/');
+test('has title', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
 
-  // ตรวจสอบว่า title มีคำว่า "Facebook"
-  await expect(page).toHaveTitle(/Facebook/);
+  // Expect a title "to contain" a substring.
+  await expect(page).toHaveTitle(/Playwright/);
 });
 
-test('คลิกปุ่ม Create new account และตรวจสอบฟอร์มสมัครสมาชิก', async ({ page }) => {
-  await page.goto('https://www.facebook.com/');
+test('get started link', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
 
-  // คลิกปุ่ม "Create new account"
-  await page.getByRole('button', { name: /Create new account/i }).click();
+  // Click the get started link.
+  await page.getByRole('link', { name: 'Get started' }).click();
 
-  // ตรวจสอบว่าฟอร์ม "Sign Up" ปรากฏขึ้น (รอให้ modal แสดงก่อน)
-  await expect(page.getByRole('dialog')).toContainText(/Sign Up/);
+  // Expects page to have a heading with the name of Installation.
+  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
 });
